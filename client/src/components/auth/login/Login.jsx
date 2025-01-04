@@ -20,11 +20,13 @@ export default function Login({ updateToken }) {
       password: passwordRef.current.value,
     }); // Let because the body can be reassigned
 
+    console.log("body: ",body)
     // Declare and init our url
     const url = baseurl+"/user/login";
     // Try/catch = fetch w/request options within fetch
     try {
       // This is an alternative way of writing the fetch than we did before. It's more dense, but fewer lines.
+      console.log("url: ",url)
       const res = await fetch(url, {
         method: "POST",
         headers: new Headers({

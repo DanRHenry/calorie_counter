@@ -16,10 +16,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 // Points to our environment file and puts the value of PORT from that variable into this PORT variable.
-// const PORT = process.env.PORT;
-const PORT = 4500;
+const PORT = process.env.PORT;
+// const PORT = 4500;
 const log = console.log;
-// Console log check for port/server running
 
 // ---------------------- Controllers: -------------------
 const user = require("./controllers/user.controller");
@@ -76,20 +75,19 @@ app.use((req, res, next) => {
 // !
 //???????????????????????????????????
 // !
-app.options("*", (req, res) => {
-    console.log("preflight");
-    if (
-//      req.headers.origin === "https://badmintown.onrender.com" &&
-      req.headers.origin === "https://danhenrydev.com" &&
-      allowMethods.includes(req.headers["access-control-request-method"]) &&
-      allowHeaders.includes(req.headers["access-control-request-headers"])
-    ) {
-      console.log("pass");
-      return res.status(204).send();
-    } else {
-      console.log("fail");
-    }
-    })
+// app.options("*", (req, res) => {
+//     console.log("preflight");
+//     if (
+//       req.headers.origin === "https://danhenrydev.com" &&
+//       allowMethods.includes(req.headers["access-control-request-method"]) &&
+//       allowHeaders.includes(req.headers["access-control-request-headers"])
+//     ) {
+//       console.log("pass");
+//       return res.status(204).send();
+//     } else {
+//       console.log("fail");
+//     }
+//     })
 //!
 
 // app.use(express.static(path.join(__dirname, 'build')));
@@ -100,8 +98,8 @@ app.options("*", (req, res) => {
 // });
 
 
-app.use("/api/caloriecounter/user", user);
-app.use("/api/caloriecounter/food", food);
-// app.use("/user", user);
-// app.use("/food", food);
+// app.use("/api/caloriecounter/user", user);
+// app.use("/api/caloriecounter/food", food);
+app.use("/user", user);
+app.use("/food", food);
 app.listen(PORT, () => log(`CalorieCounter Server on Port: ${PORT}`));
